@@ -4,5 +4,6 @@
 # 🛠 Current Library Version is 0.0.1 🛠
 
 # Todo List
-- [] Add on-message function
-- [] Add events
+[] Add pip package
+[] Add on-message function
+[] Add events
