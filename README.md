@@ -3,6 +3,10 @@
 
 # 🛠 Current library version is 0.0.1 🛠
 
+# Test Bot Screenshot
+
+![alt](https://i.imgur.com/yt4VKhW.png)
+
 # Todo List
 - [ ] Add pip package
 - [ ] Create documentation
