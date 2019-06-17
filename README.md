@@ -15,7 +15,8 @@ py -m pip install -U twbotlib
 
 # Todo List
 - [x] Add pip package
-- [ ] Create documentation
+- [x] Create documentation that detail about how to create a simple bot
+- [ ] Add more details about the classes and the methods in the documentation
 - [ ] Comment with details about any function
 - [ ] Add on-message function
 - [ ] Add events
