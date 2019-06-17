@@ -1,5 +1,5 @@
 # twbotlib
-🔷 Unoffical twitch bot library written in Python3 🔷
+🐦 Unoffical library for twitch bots written in Python3 🤖
 
 # 🛠 Current library version is 0.0.1 🛠
 
