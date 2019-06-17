@@ -5,5 +5,6 @@
 
 # Todo List
 - [ ] Add pip package
+- [ ] Create documentation
 - [ ] Add on-message function
 - [ ] Add events
