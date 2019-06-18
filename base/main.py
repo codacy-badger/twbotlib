@@ -8,7 +8,7 @@ class Bot:
         self.sock = socket.socket(socket.SOCK_DGRAM)
         self.__struct_end = '\r\n'
         self.buffer = 1024
-        self.logs = True
+        self.logs = False
         self.commands = {}
         self.is_running = False
         self.prefix = prefix
