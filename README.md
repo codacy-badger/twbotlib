@@ -18,6 +18,6 @@ py -m pip install -U twbotlib
 - [x] Add pip package
 - [x] Create documentation that detail about how to create a simple bot
 - [ ] Add more details about the classes and the methods in the documentation
-- [ ] Comment with details about any function
+- [x] Comment with details about any function
 - [ ] Add on-message function
 - [ ] Add events
