@@ -18,4 +18,5 @@ class Message:
         self.content = kwargs['message_content']
         self.sender = kwargs['message_sender']
         self.command = kwargs['message_command']
+        self.channel = kwargs['message_channel']
         self.args = kwargs['message_args']
