@@ -21,3 +21,4 @@ py -m pip install -U twbotlib
 - [x] Comment with details about any function
 - [ ] Add on-message function
 - [ ] Add events
+- [ ] Deatil about any function in the testbot.py file
