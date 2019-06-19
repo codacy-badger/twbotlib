@@ -1,4 +1,3 @@
-from random import randint
 import twbotlib
 
 __auth = twbotlib.Auth(
