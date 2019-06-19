@@ -1,5 +1,5 @@
 from __future__ import annotations
-from .struct import Auth, Message
+from .struct import *
 import socket, inspect, asyncio
 
 class Bot:
@@ -13,6 +13,7 @@ class Bot:
         self.is_running = False
         self.prefix = prefix
         self.loop = asyncio.get_event_loop()
+        set_bot(self)
     
     def connect(self) -> bool:
         """ Connection to the twitch IRC socket and returning boolean (On success is True and on fail is False). """
@@ -62,11 +63,14 @@ class Bot:
                 if self.logs:
                     print(line)
 
-    async def send(self, message:str) -> bool:
+    async def send(self, message:str, channel_name:str=None) -> bool:
         """ Send message (string) to the connected chat and returning boolean (On success is True and on fail is False). """
 
+        if not channel_name:
+            channel_name = self.auth.channel_name
+
         try:
-            self.sock.send(f'PRIVMSG #{self.auth.channel_name} :{message}{self.__struct_end}'.encode('utf-8'))
+            self.sock.send(f'PRIVMSG #{channel_name} :{message}{self.__struct_end}'.encode('utf-8'))
             return True
         except:
             return False
@@ -207,10 +211,35 @@ class Bot:
             message_content=__string.split('PRIVMSG #')[1].split(' :')[1],
             message_command=self.cutMessage(__string.split('PRIVMSG #')[1].split(' :')[1]).split(' ', 1)[0].replace('\r', ''),
             message_channel=__string.split('PRIVMSG #')[1].split(' :')[0],
-            message_args=args
+            message_args=self.argparse(args)
         )
     
-    def __repr__(self):
+    def __repr__(self) -> str:
         """ The class repr. """
 
-        return f'< Bot(@{self.auth.bot_username}) >'
+        return f'<Bot(@{self.auth.bot_username})>'
+    
+    @staticmethod
+    def argparse(args_string:str) -> list:
+        in_string, space_cut = False, False
+        out, listout = '', []
+        for i, c in enumerate(args_string):
+            if not in_string:
+                if c != '"':
+                    if c == ' ' and not space_cut:
+                        space_cut = True
+                        if out != '':
+                            listout.append(out)
+                            out = ''
+                    elif not space_cut:
+                        out += c
+                    elif space_cut and c != ' ':
+                        space_cut = False
+                        out += c
+            elif c != '"':
+                out += c
+            if c == '"':
+                in_string = not in_string
+        if out:
+            listout.append(out)
+        return listout
