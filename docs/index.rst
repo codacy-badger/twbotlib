@@ -82,7 +82,7 @@ Create your first twitch bot using twbotlib
     else:
         print('Bot failed to connect.')
 
-| If we start this script the bot is running!.. but there is no commands. To assign a command we need to create a function with name that starting with "__command_" (for example "__command_hello", to call this command you need to write the query "!hello" or whatever the prefix is.
+| If we start this script the bot is running!.. but there is no commands. To assign a command we need to create a function with name that starting with "command_" (for example "__command_hello", to call this command you need to write the query "!hello" or whatever the prefix is.
 
 .. code-block:: python
 
@@ -98,7 +98,7 @@ Create your first twitch bot using twbotlib
     async def startup():
         await bot.join()
     
-    def __command_hello(message):
+    def command_hello(message):
         bot.send('Hello!')
     
     if bot.connect():
@@ -126,7 +126,7 @@ Create your first twitch bot using twbotlib
     async def startup():
         await bot.join()
     
-    def __command_hello(message):
+    def command_hello(message):
         bot.send('Hello!')
     
     if bot.connect():
@@ -155,7 +155,7 @@ Create your first twitch bot using twbotlib
     async def startup():
         await bot.join()
     
-    def __command_hello(message):
+    def command_hello(message):
         bot.send('Hello!')
     
     if bot.connect():
