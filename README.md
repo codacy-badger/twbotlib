@@ -2,10 +2,9 @@
 
 <p align="center">
   🐦 Unoffical library for twitch bots written in Python3 🤖<br/>
-  📄 Documentation: https://twbotlib.readthedocs.io/en/latest/ 📄
+  📄 Documentation: https://twbotlib.readthedocs.io/en/latest/ 📄<br/>
+  🛠 Current library version is 0.0.4 🛠
 </p>
-
-# 🛠 Current library version is 0.0.4 🛠
 
 # Install
 
