@@ -104,6 +104,87 @@ class Bot:
                 if self.logs:
                     print(line)
     
+    async def change_name_color(self, color:str) -> bool:
+        """ Changes the bot name color and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/color {color}')
+            return True
+        except:
+            return False
+    
+    async def me(self, text:str) -> bool:
+        """ Sends a message with the /me command and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/me {text}')
+            return True
+        except:
+            return False
+    
+    async def enable_slowmode(self, seconds:int=5) -> bool:
+        """ Enables slowmode and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/slow {seconds}')
+            return True
+        except:
+            return False
+    
+    async def disable_slowmode(self) -> bool:
+        """ Disables slowmode and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send('/slowoff')
+            return True
+        except:
+            return False
+    
+    async def clearchat(self) -> bool:
+        """ Disables slowmode and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send('/clear')
+            return True
+        except:
+            return False
+    
+    async def mod(self, username:str) -> bool:
+        """ Gives moderator by username argument and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/mod {username}')
+            return True
+        except:
+            return False
+    
+    async def unmod(self, username:str) -> bool:
+        """ Removes moderator by username argument and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/unmod {username}')
+            return True
+        except:
+            return False
+    
+    async def vip(self, username:str) -> bool:
+        """ Gives vip by username argument and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/vip {username}')
+            return True
+        except:
+            return False
+    
+    async def unvip(self, username:str) -> bool:
+        """ Removes vip by username argument and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/unvip {username}')
+            return True
+        except:
+            return False
+    
     def checkPrefix(self, __message:str) -> bool:
         """ Check if message starts with the prefix. """
 
@@ -128,3 +209,8 @@ class Bot:
             message_channel=__string.split('PRIVMSG #')[1].split(' :')[0],
             message_args=args
         )
+    
+    def __repr__(self):
+        """ The class repr. """
+
+        return f'< Bot(@{self.auth.bot_username}) >'
