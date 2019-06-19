@@ -22,17 +22,17 @@ async def __command_roll(message, args:list=None):
         await message.channel.send(randint(1, 10))
 
 async def __command_dice(message):
-    await __bot.send(f'Cube One: {randint(1, 6)}, Cube Two: {randint(1, 6)}')
+    await message.channel.send(f'Cube One: {randint(1, 6)}, Cube Two: {randint(1, 6)}')
 
 async def __command_hello(message):
-    await __bot.send(f'Hello {message.sender}!')
+    await message.channel.send(f'Hello {message.sender}!')
 
 async def __command_checkchannel(message):
-    await __bot.send(f'#{message.channel}')
+    await message.channel.send(f'#{message.channel}')
 
 async def __command_checkrepr(message):
     print(message)
-    await __bot.send('Checked.')
+    await message.channel.send('Checked.')
 
 if __bot.connect():
     print('Bot connected successfully.')
