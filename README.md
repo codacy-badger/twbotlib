@@ -1,4 +1,5 @@
-# twbotlib
+![alt](https://i.imgur.com/G5fKROA.jpg)
+
 🐦 Unoffical library for twitch bots written in Python3 🤖<br/>
 📄 Documentation: https://twbotlib.readthedocs.io/en/latest/ 📄
 
