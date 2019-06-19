@@ -12,6 +12,6 @@
 py -m pip install -U twbotlib
 ```
 
-## Test Bot Screenshot ##
+## Test Bot Screenshot (old testbot) ##
 *Note: I used same user for testing, messages starting with the ! prefix is command and after that is the bot answer.*
 ![alt](https://i.imgur.com/yt4VKhW.png)
