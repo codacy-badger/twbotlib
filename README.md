@@ -1,6 +1,6 @@
 ![alt](https://i.imgur.com/G5fKROA.jpg)
 
-<p style="text-align:center">
+<p align="center">
   🐦 Unoffical library for twitch bots written in Python3 🤖<br/>
   📄 Documentation: https://twbotlib.readthedocs.io/en/latest/ 📄
 </p>
