@@ -24,7 +24,9 @@ class Bot:
             self.sock.send(f'PASS {self.auth.oauth_token}{self.__struct_end}'.encode('utf-8'))
             self.sock.send(f'NICK {self.auth.bot_username}{self.__struct_end}'.encode('utf-8'))
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def join(self, channel_name:str=None) -> bool:
@@ -36,7 +38,9 @@ class Bot:
         try:
             self.sock.send(f'JOIN #{channel_name}{self.__struct_end}'.encode('utf-8'))
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def depart(self, channel_name:str=None) -> bool:
@@ -48,7 +52,9 @@ class Bot:
         try:
             self.sock.send(f'PART #{channel_name}{self.__struct_end}'.encode('utf-8'))
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def wait_until_join(self) -> None:
@@ -73,14 +79,16 @@ class Bot:
         try:
             self.sock.send(f'PRIVMSG #{channel_name} :{message}{self.__struct_end}'.encode('utf-8'))
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
 
     def read_commands(self, __globals:dict) -> None:
         """ Read the exists commands from the file-globals. """
 
-        for command in [x for x in __globals if '__command_' in x]:
-            self.commands[command.replace('__command_', '')] = __globals[command]
+        for command in [x for x in __globals if 'command_' in x]:
+            self.commands[command.replace('command_', '')] = __globals[command]
     
     def run(self, startup_function=None) -> None:
         """ Run the bot and start the main while. """
@@ -106,6 +114,8 @@ class Bot:
                             await self.commands[message.command](message, message.args)
                         else:
                             await self.commands[message.command](message)
+                    elif hasattr(self.event, 'on_message'):
+                        await self.event.on_message(message)
                 if self.logs:
                     print(line)
     
@@ -115,7 +125,9 @@ class Bot:
         try:
             await self.send(f'/color {color}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def me(self, text:str) -> bool:
@@ -124,7 +136,31 @@ class Bot:
         try:
             await self.send(f'/me {text}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
+            return False
+    
+    async def timeout(self, username:str, seconds:int=600) -> bool:
+        """ Set timeout by username and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/timeout {username} {seconds}')
+            return True
+        except Exception as e:
+            if self.logs:
+                print(e)
+            return False
+    
+    async def untimeout(self, username:str, seconds:int=600) -> bool:
+        """ Remove timeout by username and returning boolean (On success is True and on fail is False). """
+
+        try:
+            await self.send(f'/unban {username}')
+            return True
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def enable_slowmode(self, seconds:int=5) -> bool:
@@ -133,7 +169,9 @@ class Bot:
         try:
             await self.send(f'/slow {seconds}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def disable_slowmode(self) -> bool:
@@ -142,7 +180,9 @@ class Bot:
         try:
             await self.send('/slowoff')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def clearchat(self) -> bool:
@@ -151,7 +191,9 @@ class Bot:
         try:
             await self.send('/clear')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def mod(self, username:str) -> bool:
@@ -160,7 +202,9 @@ class Bot:
         try:
             await self.send(f'/mod {username}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def unmod(self, username:str) -> bool:
@@ -169,7 +213,9 @@ class Bot:
         try:
             await self.send(f'/unmod {username}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def vip(self, username:str) -> bool:
@@ -178,7 +224,9 @@ class Bot:
         try:
             await self.send(f'/vip {username}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     async def unvip(self, username:str) -> bool:
@@ -187,7 +235,9 @@ class Bot:
         try:
             await self.send(f'/unvip {username}')
             return True
-        except:
+        except Exception as e:
+            if self.logs:
+                print(e)
             return False
     
     def checkPrefix(self, __message:str) -> bool:
@@ -219,7 +269,7 @@ class Bot:
     
     def __repr__(self) -> str:
         """ The class repr. """
-        
+
         return f'<Bot(@{self.auth.bot_username})>'
     
     @staticmethod

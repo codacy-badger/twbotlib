@@ -1,6 +1,11 @@
 from __future__ import annotations
 from .exceptions import *
 
+colors = [
+    'Blue', 'BlueViolet', 'CadetBlue', 'Chocolate', 'Coral', 'DodgerBlue', 'Firebrick',
+    'GoldenRod', 'Green', 'HotPink', 'OrangeRed', 'Red', 'SeaGreen', 'SpringGreen', 'YellowGreen'
+]
+
 def set_bot(bot):
     """ Set the gbot variable for the struct.py file. """
 
@@ -35,7 +40,7 @@ class Message:
     def __repr__(self) -> str:
         """ The class repr. """
         
-        return f'<Message(#{self.channel}, @{self.sender})>'
+        return f'<Message({self.channel}, @{self.sender})>'
 
 class Chat:
     def __init__(self, channel_name) -> None:
@@ -43,16 +48,16 @@ class Chat:
     
     async def send(self, message:str) -> bool:
         """ Send message (string) to the Channel.name (object attr) chat and returning boolean (On success is True and on fail is False). """
-        
+
         return await gbot.send(message, self.name)
     
-    def __repr(self) -> str:
+    def __repr__(self) -> str:
         """ The class repr. """
         
-        return f'<Channel(#{self.name})>'
+        return f'#{self.name}'
 
 class Events:
-    def __repr(self) -> str:
+    def __repr__(self) -> str:
         """ The class repr. """
-        
+
         return f'<Events Class>'
