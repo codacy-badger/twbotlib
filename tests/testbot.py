@@ -8,9 +8,12 @@ __auth = twbotlib.Auth(
 )
 
 __bot = twbotlib.Bot(__auth)
+__bot.logs = True
 
 async def startup():
     await __bot.join()
+    await __bot.wait_until_join()
+    await __bot.change_name_color('CadetBlue')
 
 async def __command_roll(message, args=None):
     if args and int(args) < 101:
@@ -26,6 +29,10 @@ async def __command_hello(message):
 
 async def __command_checkchannel(message):
     await __bot.send(f'#{message.channel}')
+
+async def __command_checkrepr(message):
+    print(message)
+    await __bot.send('Checked.')
 
 if __bot.connect():
     print('Bot connected successfully.')
