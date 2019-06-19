@@ -23,3 +23,4 @@ py -m pip install -U twbotlib
 - [ ] Add more events
 - [ ] Deatil about any function in the testbot.py file
 - [ ] Add more examples
+- [ ] SSL Support
