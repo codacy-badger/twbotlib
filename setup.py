@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setuptools.setup(
     name='twbotlib',
-    version='0.0.3',
+    version='0.0.4',
     author='truedl',
     author_email='terajamoffical@example.com',
     description='🐦 Unoffical twitch bot library written in Python3 🤖',
