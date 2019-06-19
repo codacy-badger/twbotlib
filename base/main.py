@@ -13,6 +13,7 @@ class Bot:
         self.is_running = False
         self.prefix = prefix
         self.loop = asyncio.get_event_loop()
+        self.event = Events()
         set_bot(self)
     
     def connect(self) -> bool:
@@ -64,7 +65,7 @@ class Bot:
                     print(line)
 
     async def send(self, message:str, channel_name:str=None) -> bool:
-        """ Send message (string) to the connected chat and returning boolean (On success is True and on fail is False). """
+        """ Send message (string) to the channel_name (argument) chat and returning boolean (On success is True and on fail is False). """
 
         if not channel_name:
             channel_name = self.auth.channel_name
@@ -203,27 +204,29 @@ class Bot:
         """ Returning Message object from string. """
         
         try:
-            args = self.cutMessage(__string.split('PRIVMSG #')[1].split(' :')[1]).split(' ', 1)[1].replace('\r', '')
-        except:
+            args = self.argparse(self.cutMessage(__string.split('PRIVMSG #')[1].split(' :')[1]).split(' ', 1)[1].replace('\r', ''))
+        except Exception as e:
+            if self.logs:
+                print(f'logs: {e}')
             args = None
         return Message(
             message_sender=__string[1:].split('!', 1)[0],
             message_content=__string.split('PRIVMSG #')[1].split(' :')[1],
             message_command=self.cutMessage(__string.split('PRIVMSG #')[1].split(' :')[1]).split(' ', 1)[0].replace('\r', ''),
             message_channel=__string.split('PRIVMSG #')[1].split(' :')[0],
-            message_args=self.argparse(args)
+            message_args=args,
         )
     
     def __repr__(self) -> str:
         """ The class repr. """
-
+        
         return f'<Bot(@{self.auth.bot_username})>'
     
     @staticmethod
     def argparse(args_string:str) -> list:
         in_string, space_cut = False, False
         out, listout = '', []
-        for i, c in enumerate(args_string):
+        for c in args_string:
             if not in_string:
                 if c != '"':
                     if c == ' ' and not space_cut:
