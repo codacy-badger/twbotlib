@@ -15,11 +15,11 @@ async def startup():
     await __bot.wait_until_join()
     await __bot.change_name_color('CadetBlue')
 
-async def __command_roll(message, args=None):
-    if args and int(args) < 101:
-        await __bot.send(randint(1, int(args)))
+async def __command_roll(message, args:list=None):
+    if args and int(args[0]) < 101:
+        await message.channel.send(randint(1, int(args[0])))
     else:
-        await __bot.send(randint(1, 10))
+        await message.channel.send(randint(1, 10))
 
 async def __command_dice(message):
     await __bot.send(f'Cube One: {randint(1, 6)}, Cube Two: {randint(1, 6)}')
