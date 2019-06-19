@@ -2,8 +2,8 @@ from random import choice
 import twbotlib
 
 auth = twbotlib.Auth(
-    bot_username='truemediav',
-    oauth_token='oauth:maiz8csszurk6f19x0g5xspot2tkih',
+    bot_username='bot_username',
+    oauth_token='oauth:token',
 )
 
 bot = twbotlib.Bot(
