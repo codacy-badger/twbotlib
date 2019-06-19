@@ -12,7 +12,7 @@ bot = twbotlib.Bot(
 async def startup():
     await bot.join()
 
-async def __command_hello(message):
+async def command_hello(message):
     await message.channel.send('Hello, World!')
 
 if bot.connect():
