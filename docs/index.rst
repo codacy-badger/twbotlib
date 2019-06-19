@@ -28,7 +28,7 @@ Create your first twitch bot using twbotlib
         oauth_token='your_oauth_token'
     )
 
-| After that we need to assign the main bot variable with our Auth, see below.
+| After that we need to assign the main bot variable with our Auth, see below. (there is more kwargument that named "channel_name", is the main channel that saved in the Auth class. For example if your call the join method you can to not provide arguments and is use the "channel_name" instead of this argument.)
 
 .. code-block:: python
 
@@ -59,7 +59,7 @@ Create your first twitch bot using twbotlib
     else:
         print('Bot failed to connect.')
 
-| After we connected successfully, we need wait until the bot joined the channel and then run the bot. See below.
+| After we connected successfully, we need to call the run method to startup the bot and provide the asynchronous startup function (The function below is just call the join method to say the bot he needs to join the channel_name (because no arguments provided)). See below.
 
 .. code-block:: python
 
@@ -72,11 +72,13 @@ Create your first twitch bot using twbotlib
     
     bot = twbotlib.Bot(auth)
     
+    async def startup():
+        await bot.join()
+    
     if bot.connect():
         print('Bot successfully connected.')
         
-        bot.wait_until_join()
-        bot.run()
+        bot.run(startup)
     else:
         print('Bot failed to connect.')
 
@@ -93,14 +95,16 @@ Create your first twitch bot using twbotlib
     
     bot = twbotlib.Bot(auth)
     
+    async def startup():
+        await bot.join()
+    
     def __command_hello(message):
         bot.send('Hello!')
     
     if bot.connect():
         print('Bot successfully connected.')
         
-        bot.wait_until_join()
-        bot.run()
+        bot.run(startup)
     else:
         print('Bot failed to connect.')
 
@@ -119,6 +123,9 @@ Create your first twitch bot using twbotlib
     
     bot = twbotlib.Bot(auth)
     
+    async def startup():
+        await bot.join()
+    
     def __command_hello(message):
         bot.send('Hello!')
     
@@ -126,13 +133,13 @@ Create your first twitch bot using twbotlib
         print('Bot successfully connected.')
         
         bot.read_commands(globals())
-        bot.wait_until_join()
-        bot.run()
+        bot.run(startup)
     else:
         print('Bot failed to connect.')
 
 | And.. That's it!, we add "bot.read_commands(globals())" and now if we run the bot then is full-functional bot that responding on "!hello" command!.
 | If you want to change the prefix from "!" to ".." for example then see the code below.
+
 
 .. code-block:: python
 
@@ -143,7 +150,10 @@ Create your first twitch bot using twbotlib
         oauth_token='your_oauth_token'
     )
     
-    bot = twbotlib.Bot(auth, '..') # We add more string argument here
+    bot = twbotlib.Bot(auth, '..') # Here we provide more one string argument for the prefix.
+    
+    async def startup():
+        await bot.join()
     
     def __command_hello(message):
         bot.send('Hello!')
@@ -152,8 +162,7 @@ Create your first twitch bot using twbotlib
         print('Bot successfully connected.')
         
         bot.read_commands(globals())
-        bot.wait_until_join()
-        bot.run()
+        bot.run(startup)
     else:
         print('Bot failed to connect.')
 
