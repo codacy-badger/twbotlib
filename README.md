@@ -8,7 +8,7 @@
 
 # Install
 
-```
+```bat
 py -m pip install -U twbotlib
 ```
 
